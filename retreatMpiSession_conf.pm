@@ -28,7 +28,7 @@ limitations under the License.
 
 =head1 NAME
 
-Bio::EnsEMBL::Compara::PipeConfig::retreatMpiSession_conf
+Bio::EnsEMBL::Hive::Examples::Factories::PipeConfig::retreatMpiSession_conf
 
 =head1 DESCRIPTION
 
