@@ -49,8 +49,8 @@ int main ( int argc, char *argv[] ) {
         int* data = new int[array_size];
         long expected_sum = 0;
         for(int i=0; i<array_size; i++) {
-            //data[i] =  i * 1.0;
-            data[i] =  1;
+            data[i] = i;
+            //data[i] = 1;
             expected_sum = expected_sum + data[i];
         }
         cout << "Initialized array sum = " << expected_sum << endl;
