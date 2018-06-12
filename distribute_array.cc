@@ -67,14 +67,15 @@ int main ( int argc, char *argv[] ) {
             offset = offset + chunksize;
         }
 
-        // Master does it's share of the work
+        // Master does its share of the work
         offset = 0;
         cout << "Sent " << chunksize << " elements to task SERVER offset= " << offset << endl;
         mysum = make_operation(offset, chunksize, my_id, data);
 
         // Reduce data from workers
         MPI_Reduce(&mysum, &sum, 1, MPI_FLOAT, MPI_SUM, SERVER_NODE, MPI_COMM_WORLD);
-        cout << "Sample results:" << endl;
+
+        cout << "Sample data:" << endl;
         offset = 0;
         for (int i=0; i<numprocs; i++) {
             for (int j=0; j<5; j++) 
@@ -86,7 +87,7 @@ int main ( int argc, char *argv[] ) {
 
     }
     else {
-        // Server nodes
+        // Worker nodes
         // Receive fraction of array sent by the server node
         source = SERVER_NODE;
         MPI_Recv(&offset, 1, MPI_INT, source, tag1, MPI_COMM_WORLD, &status);
@@ -107,8 +108,8 @@ float make_operation(int myoffset, int chunk, int myid, float data[]) {
     // Perform some operations with the array
 
     float mysum = 0;
-    float* waister_array;
-    waister_array = new float[10000];
+    float* waster_array;
+    waster_array = new float[10000];
 
     for(int i=myoffset; i < myoffset + chunk; i++) {
         mysum = mysum + data[i] + 1;
@@ -116,7 +117,7 @@ float make_operation(int myoffset, int chunk, int myid, float data[]) {
         //Do the same amout of work per each position of the array
         for(int j=0; j < 10000; j++) {
             for(int k=0; k < 10000; k++) {
-                waister_array[j] = waister_array[i] + data[i] + 1 * 1.0;
+                waster_array[j] = waster_array[i] + data[i] + 1 * 1.0;
             }
         }
 
