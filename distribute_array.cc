@@ -122,6 +122,7 @@ float make_operation(int myoffset, int chunk, int myid, float data[]) {
         }
 
     }
+    delete [] waster_array;
 
     cout << "proc [" << myid << "] sum = " << mysum << endl;
     return(mysum);
