@@ -28,7 +28,7 @@ limitations under the License.
 
 =head1 NAME
 
-Bio::EnsEMBL::Hive::Examples::Factories::PipeConfig::retreatMpiSession_conf
+retreatMpiSession_conf
 
 =head1 DESCRIPTION
 
@@ -52,7 +52,7 @@ Internal methods are usually preceded with an underscore (_)
 
 =cut
 
-package Bio::EnsEMBL::Hive::Examples::Factories::PipeConfig::retreatMpiSession_conf;
+package retreatMpiSession_conf;
 
 use strict;
 use warnings;
@@ -69,7 +69,6 @@ sub default_options {
         'password'      => $ENV{ENSADMIN_PSW},
         'mpi_code_exe'  => '/homes/mateus/mpi/distribute_array',
         'mpirun_exe'    => '/usr/lib64/mpich-3.2/bin/mpirun',
-        'array_size'    => 500,
     };
 }
 
@@ -101,7 +100,6 @@ sub pipeline_wide_parameters {  # these parameter values are visible to all anal
 
         'mpi_code_exe'     => $self->o('mpi_code_exe'),
         'mpirun_exe'       => $self->o('mpirun_exe'),
-        'array_size'       => $self->o('array_size'),
     }
 }
 
@@ -114,9 +112,10 @@ sub pipeline_analyses {
 
         {   -logic_name => 'create_jobs',
             -module     => 'Bio::EnsEMBL::Hive::RunnableDB::Dummy',
-            -input_ids => [
-                {},
-            ],
+            -input_ids  => [{
+                                'array_size' => 500
+                            }],
+
             -flow_into => {
                 1 => [ 
                             'run_cmd_4_cores_ptile_1', 'run_cmd_4_cores_ptile_2',
