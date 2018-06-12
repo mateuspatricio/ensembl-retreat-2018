@@ -12,7 +12,7 @@ using namespace std;
 
 //Prototypes
 int main ( int argc, char *argv[] );
-float make_operation(float data[], int n_elements, int myid);
+long make_operation(int data[], int n_elements, int myid);
 
 int main ( int argc, char *argv[] ) {
 
@@ -46,32 +46,32 @@ int main ( int argc, char *argv[] ) {
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
 
-        float* data = new float[array_size];
-        float sum = 0;
+        int* data = new int[array_size];
+        long expected_sum = 0;
         for(int i=0; i<array_size; i++) {
             //data[i] =  i * 1.0;
             data[i] =  1;
-            sum = sum + data[i];
+            expected_sum = expected_sum + data[i];
         }
-        cout << "Initialized array sum = " << sum << endl;
+        cout << "Initialized array sum = " << expected_sum << endl;
 
         // Send each job a a fraction of the array, keeping the first for the server node
         int chunksize = (array_size / numprocs);
         int offset = chunksize;
         for (int destination_id=1; destination_id<numprocs; destination_id++) {
             MPI_Send(&chunksize, 1, MPI_INT, destination_id, tag_chunksize, MPI_COMM_WORLD);
-            MPI_Send(&data[offset], chunksize, MPI_FLOAT, destination_id, tag_data, MPI_COMM_WORLD);
+            MPI_Send(&data[offset], chunksize, MPI_INT, destination_id, tag_data, MPI_COMM_WORLD);
             cout << "Sent " << chunksize << " elements to task " << destination_id << " offset= " << offset << endl;
             offset = offset + chunksize;
         }
 
         // Master does its share of the work
         cout << "Sent " << chunksize << " elements to task SERVER no offset" << endl;
-        float mysum = make_operation(data, chunksize, my_id);
+        long mysum = make_operation(data, chunksize, my_id);
 
         // Reduce data from workers
-        sum = -1;
-        MPI_Reduce(&mysum, &sum, 1, MPI_FLOAT, MPI_SUM, SERVER_NODE, MPI_COMM_WORLD);
+        long sum = -1;
+        MPI_Reduce(&mysum, &sum, 1, MPI_LONG, MPI_SUM, SERVER_NODE, MPI_COMM_WORLD);
 
         cout << "Sample data:" << endl;
         offset = 0;
@@ -81,7 +81,7 @@ int main ( int argc, char *argv[] ) {
             cout << endl;
             offset = offset + chunksize;
         }
-        cout << "Final sum = " << sum << endl;
+        cout << "Final sum = " << sum << " " << (sum == expected_sum ? "OK" : "ERROR") << endl;
 
         delete [] data;
 
@@ -91,13 +91,13 @@ int main ( int argc, char *argv[] ) {
         // Receive fraction of array sent by the server node
         int chunksize;
         MPI_Recv(&chunksize, 1, MPI_INT, SERVER_NODE, tag_chunksize, MPI_COMM_WORLD, &status);
-        float* data = new float[chunksize];
-        MPI_Recv(data, chunksize, MPI_FLOAT, SERVER_NODE, tag_data, MPI_COMM_WORLD, &status);
+        int* data = new int[chunksize];
+        MPI_Recv(data, chunksize, MPI_INT, SERVER_NODE, tag_data, MPI_COMM_WORLD, &status);
 
-        float mysum = make_operation(data, chunksize, my_id);
+        long mysum = make_operation(data, chunksize, my_id);
 
         /* Send my results back to the the server task */
-        MPI_Reduce(&mysum, NULL, 1, MPI_FLOAT, MPI_SUM, SERVER_NODE, MPI_COMM_WORLD);
+        MPI_Reduce(&mysum, NULL, 1, MPI_LONG, MPI_SUM, SERVER_NODE, MPI_COMM_WORLD);
 
         delete [] data;
     }
@@ -106,10 +106,10 @@ int main ( int argc, char *argv[] ) {
 }
 
 
-float make_operation(float data[], int n_elements, int myid) {
+long make_operation(int data[], int n_elements, int myid) {
     // Perform some operations with the array
 
-    float mysum = 0;
+    long mysum = 0;
     float* waster_array;
     waster_array = new float[10000];
 
