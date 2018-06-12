@@ -25,6 +25,9 @@ module load mpi/mpich-3.2-x86_64
 Using the default mpirun:
 `/usr/lib64/mpich-3.2/bin/mpirun -n 4 /homes/mateus/mpi/distribute_array 100`
 
+## Initiating the pipeline
+`init_pipeline.pl Bio::EnsEMBL::Hive::Examples::Factories::PipeConfig::retreatMpiSession_conf -pipeline_name retreat_mpi_session_500`
+
 ## Querying the results
 ```SQL
 SELECT logic_name, input_id, runtime_msec, cpu_sec, lifespan_sec, mem_megs FROM job JOIN analysis_base USING (analysis_id) JOIN role USING (role_id) JOIN worker USING (worker_id) JOIN worker_resource_usage USING (worker_id) WHERE logic_name like "run_cmd%" AND job.status = "DONE" ORDER BY (cpu_sec);
