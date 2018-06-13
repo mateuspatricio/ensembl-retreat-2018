@@ -39,13 +39,16 @@ source /nfs/software/ensembl/RHEL7-JUL2017-core2/envs/plenv.sh
 
 ## Querying the results
 ```SQL
-SELECT logic_name, input_id, runtime_msec, cpu_sec, lifespan_sec, mem_megs FROM job JOIN analysis_base USING (analysis_id) JOIN role USING (role_id) JOIN worker_resource_usage USING (worker_id) WHERE logic_name like "run_cmd%" AND job.status = "DONE" ORDER BY (cpu_sec);
+SELECT logic_name, input_id, runtime_msec, cpu_sec, lifespan_sec, mem_megs FROM job JOIN analysis_base USING (analysis_id) JOIN role USING (role_id) JOIN worker_resource_usage USING (worker_id) WHERE logic_name like "run_cmd%" AND job.status = "DONE" ORDER BY (lifespan_sec);
 ```
 
-## Compile with MySQL support (withing ensembl environment):
+## Compile with MySQL support (within ensembl environment):
 ```
 mpic++ -o distribute_array_mysql -L/usr/include/mysql -lmysqlclient -I/usr/include/mysql distribute_array_mysql.cc
 ```
 
 ### Now testing it:
 `mpirun -n 4 /homes/mateus/mpi/ensembl-retreat-2018/distribute_array_mysql 10`
+
+### More details on how to use MPI on eHive
+https://ensembl-hive.readthedocs.io/en/version-2.5/advanced_usage/mpi.html
