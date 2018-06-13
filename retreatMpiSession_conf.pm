@@ -136,6 +136,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_4c_ptile_1_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_4_cores_ptile_2',
@@ -144,6 +145,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_4c_ptile_2_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_10_cores_ptile_1',
@@ -152,6 +154,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_10c_ptile_1_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_10_cores_ptile_2',
@@ -160,6 +163,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_10c_ptile_2_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_20_cores_ptile_1',
@@ -168,6 +172,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_20c_ptile_1_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_20_cores_ptile_5',
@@ -176,6 +181,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_20c_ptile_5_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_50_cores_ptile_2',
@@ -184,6 +190,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_50c_ptile_2_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_50_cores_ptile_10',
@@ -192,6 +199,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_50c_ptile_10_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_100_cores_ptile_2',
@@ -200,6 +208,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_100c_ptile_2_mpi',
+            -max_retry_count => 1,
         },
 
         {   -logic_name    => 'run_cmd_100_cores_ptile_10',
@@ -208,6 +217,7 @@ sub pipeline_analyses {
                 'cmd'       => '#mpirun_exe# #mpi_code_exe# #array_size#',
             },
             -rc_name => '500Mb_100c_ptile_10_mpi',
+            -max_retry_count => 1,
         },
     ];
 }
