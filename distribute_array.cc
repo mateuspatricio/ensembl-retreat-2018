@@ -73,6 +73,7 @@ int main ( int argc, char *argv[] ) {
         long sum = -1;
         MPI_Reduce(&mysum, &sum, 1, MPI_LONG, MPI_SUM, SERVER_NODE, MPI_COMM_WORLD);
 
+        // Just print out some sample of the data
         cout << "Sample data:" << endl;
         offset = 0;
         for (int i=0; i<numprocs; i++) {
@@ -82,6 +83,7 @@ int main ( int argc, char *argv[] ) {
             offset = offset + chunksize;
         }
 
+        // If the sum is not the same as the expected one ... panic and exit
         if (sum != expected_sum) {
             cout << "Quitting. Final sum (" <<  sum << ") != expected_sum (" << expected_sum << ").\n";
             MPI_Abort(MPI_COMM_WORLD, 1);
@@ -110,17 +112,19 @@ int main ( int argc, char *argv[] ) {
 }
 
 
+// Perform some operations with the array
 long make_operation(int data[], int n_elements, int myid) {
-    // Perform some operations with the array
 
     long mysum = 0;
+
+    //We need to waste some time.
     float* waster_array;
     waster_array = new float[1000];
 
     for(int i=0; i<n_elements; i++) {
         mysum = mysum + data[i];
 
-        //Do the same amout of work per each position of the array
+        //Do the same amout of work per each position of the array. (keep it linear)
         for(int j=0; j < 1000; j++) {
             for(int k=0; k < 1000; k++) {
                 waster_array[j] = waster_array[i] + data[i] + 1 * 1.0;
