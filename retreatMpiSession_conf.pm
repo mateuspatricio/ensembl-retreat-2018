@@ -77,20 +77,20 @@ sub resource_classes {
     my ($self) = @_;
     return {
         %{$self->SUPER::resource_classes},  # inherit 'default' from the parent class
-        '500Mb_4c_ptile_1_mpi'    => {'LSF' => '-q mpi-rh7 -n 4 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=1]"' },
-        '500Mb_4c_ptile_2_mpi'    => {'LSF' => '-q mpi-rh7 -n 4 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=2]"' },
+        '500Mb_4c_ptile_1_mpi'    => {'LSF' => '-q mpi-rh7 -n 4 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=1]"' },
+        '500Mb_4c_ptile_2_mpi'    => {'LSF' => '-q mpi-rh7 -n 4 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=2]"' },
 
-        '500Mb_10c_ptile_1_mpi'   => {'LSF' => '-q mpi-rh7 -n 10 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=1]"' },
-        '500Mb_10c_ptile_2_mpi'   => {'LSF' => '-q mpi-rh7 -n 10 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=2]"' },
+        '500Mb_10c_ptile_1_mpi'   => {'LSF' => '-q mpi-rh7 -n 10 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=1]"' },
+        '500Mb_10c_ptile_2_mpi'   => {'LSF' => '-q mpi-rh7 -n 10 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=2]"' },
 
-        '500Mb_20c_ptile_1_mpi'   => {'LSF' => '-q mpi-rh7 -n 20 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=1]"' },
-        '500Mb_20c_ptile_5_mpi'   => {'LSF' => '-q mpi-rh7 -n 20 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=5]"' },
+        '500Mb_20c_ptile_1_mpi'   => {'LSF' => '-q mpi-rh7 -n 20 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=1]"' },
+        '500Mb_20c_ptile_5_mpi'   => {'LSF' => '-q mpi-rh7 -n 20 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=5]"' },
 
-        '500Mb_50c_ptile_2_mpi'   => {'LSF' => '-q mpi-rh7 -n 50 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=2]"' },
-        '500Mb_50c_ptile_10_mpi'  => {'LSF' => '-q mpi-rh7 -n 50 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=10]"' },
+        '500Mb_50c_ptile_2_mpi'   => {'LSF' => '-q mpi-rh7 -n 50 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=2]"' },
+        '500Mb_50c_ptile_10_mpi'  => {'LSF' => '-q mpi-rh7 -n 50 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=10]"' },
 
-        '500Mb_100c_ptile_2_mpi'  => {'LSF' => '-q mpi-rh7 -n 100 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=2]"' },
-        '500Mb_100c_ptile_10_mpi' => {'LSF' => '-q mpi-rh7 -n 100 -M500 -R"select[mem>500] rusage[mem=500] span[ptile=10]"' },
+        '500Mb_100c_ptile_2_mpi'  => {'LSF' => '-q mpi-rh7 -n 100 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=2]"' },
+        '500Mb_100c_ptile_10_mpi' => {'LSF' => '-q mpi-rh7 -n 100 -M500 -R"select[mem>500] rusage[mem=500] same[model] span[ptile=10]"' },
     }
 }
 
