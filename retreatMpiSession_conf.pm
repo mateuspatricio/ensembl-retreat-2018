@@ -69,6 +69,7 @@ sub default_options {
         'password'      => $ENV{ENSADMIN_PSW},
         'mpi_code_exe'  => '/homes/mateus/mpi/distribute_array',
         'mpirun_exe'    => '/usr/lib64/mpich-3.2/bin/mpirun',
+        'array_size'    => 500,
     };
 }
 
@@ -113,7 +114,7 @@ sub pipeline_analyses {
         {   -logic_name => 'create_jobs',
             -module     => 'Bio::EnsEMBL::Hive::RunnableDB::Dummy',
             -input_ids  => [{
-                                'array_size' => 500
+                                'array_size' => $self->o('array_size'),
                             }],
 
             -flow_into => {
