@@ -81,7 +81,11 @@ int main ( int argc, char *argv[] ) {
             cout << endl;
             offset = offset + chunksize;
         }
-        cout << "Final sum = " << sum << " " << (sum == expected_sum ? "OK" : "ERROR") << endl;
+
+        if (sum != expected_sum) {
+            cout << "Quitting. Final sum (" <<  sum << ") != expected_sum (" << expected_sum << ").\n";
+            MPI_Abort(MPI_COMM_WORLD, 1);
+        }
 
         delete [] data;
 
@@ -111,14 +115,14 @@ long make_operation(int data[], int n_elements, int myid) {
 
     long mysum = 0;
     float* waster_array;
-    waster_array = new float[10000];
+    waster_array = new float[1000];
 
     for(int i=0; i<n_elements; i++) {
         mysum = mysum + data[i];
 
         //Do the same amout of work per each position of the array
-        for(int j=0; j < 10000; j++) {
-            for(int k=0; k < 10000; k++) {
+        for(int j=0; j < 1000; j++) {
+            for(int k=0; k < 1000; k++) {
                 waster_array[j] = waster_array[i] + data[i] + 1 * 1.0;
             }
         }
