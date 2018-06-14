@@ -52,3 +52,6 @@ mpic++ -o distribute_array_mysql -L/usr/include/mysql -lmysqlclient -I/usr/inclu
 
 ### More details on how to use MPI on eHive
 https://ensembl-hive.readthedocs.io/en/version-2.5/advanced_usage/mpi.html
+
+## Information on the relative speed of network vs. disk operations:
+https://gist.github.com/jboner/2841832
